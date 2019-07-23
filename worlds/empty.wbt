@@ -1,0 +1,201 @@
+#VRML_SIM R2019b utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.6550575262609086 -0.7432019719476499 -0.13620009611620654 0.5455788469331191
+  position -0.7605409550796238 1.1716007467166203 2.010587263308787
+  follow "robot:solid:solid:solid:solid"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+}
+Robot {
+  translation 0 0.2 0
+  children [
+    DEF robot Solid {
+      translation 0 0.1 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+            roughness 1
+            metalness 0
+          }
+          geometry DEF S_CYLINDER Cylinder {
+            height 0.2
+            radius 0.05
+          }
+        }
+        HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 1 0
+            anchor 0 1 0
+            staticFriction 0.01
+          }
+          device [
+            RotationalMotor {
+              name "motor1"
+              controlPID 0 0 0
+              maxVelocity 4.92
+              maxTorque 4.2
+            }
+            PositionSensor {
+              name "encoder1"
+              resolution 0.3142
+            }
+          ]
+          endPoint Solid {
+            translation 0.02 0.16000000000000003 0
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  roughness 1
+                  metalness 0
+                }
+                geometry DEF S_BOX1 Box {
+                  size 0.16 0.12 0.1
+                }
+              }
+              HingeJoint {
+                jointParameters HingeJointParameters {
+                  anchor 0.02 0 0
+                  staticFriction 0.01
+                }
+                device [
+                  RotationalMotor {
+                    name "motor2"
+                    controlPID 0 0 0
+                    maxVelocity 4.92
+                    maxTorque 4.2
+                  }
+                  PositionSensor {
+                    name "encoder2"
+                    resolution 0.314
+                  }
+                ]
+                endPoint Solid {
+                  translation 0.13 0 0.085
+                  rotation 0 1 0 1.570796
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        roughness 1
+                        metalness 0
+                      }
+                      geometry DEF S_BOX2 Box {
+                        size 0.328 0.12 0.1
+                      }
+                    }
+                    HingeJoint {
+                      jointParameters HingeJointParameters {
+                        axis 0 0 1
+                        anchor -0.1 0 0
+                        staticFriction 0.01
+                      }
+                      device [
+                        RotationalMotor {
+                          name "motor3"
+                          minPosition -2.0944
+                          maxPosition 2.72271
+                          maxTorque 1.47
+                        }
+                        PositionSensor {
+                          name "encoder3"
+                          resolution 1
+                        }
+                      ]
+                      endPoint Solid {
+                        translation -0.201775 0 -0.0915
+                        rotation 0 0 1 0
+                        children [
+                          Shape {
+                            appearance PBRAppearance {
+                              roughness 1
+                              metalness 0
+                            }
+                            geometry DEF S_BOX3 Box {
+                              size 0.25222 0.083 0.083
+                            }
+                          }
+                          HingeJoint {
+                            jointParameters HingeJointParameters {
+                              axis 0 0 1
+                              anchor -0.105 0 0
+                              staticFriction 0.01
+                            }
+                            device [
+                              RotationalMotor {
+                                name "motor4"
+                                maxTorque 0.21
+                              }
+                              PositionSensor {
+                                name "enocder4"
+                                resolution 1
+                              }
+                            ]
+                            endPoint DEF G_CONE Solid {
+                              translation -0.22999999999999998 0 0
+                              rotation 0 0 1 1.570799693899574
+                              children [
+                                DEF G_CONE Shape {
+                                  appearance PBRAppearance {
+                                  }
+                                  geometry DEF G_CONE Cone {
+                                    bottomRadius 0.05
+                                    height 0.2
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                        boundingObject USE S_BOX3
+                        physics Physics {
+                          density -1
+                          mass 1
+                        }
+                      }
+                    }
+                  ]
+                  boundingObject USE S_BOX2
+                  physics Physics {
+                    density -1
+                    mass 0.58273
+                  }
+                }
+              }
+            ]
+            boundingObject USE S_BOX1
+            physics Physics {
+              density -1
+              mass 0.586
+            }
+          }
+        }
+      ]
+      boundingObject USE S_CYLINDER
+      physics Physics {
+        density -1
+        mass 0.58555
+      }
+    }
+  ]
+  controller "arm"
+}
+Solid {
+  translation 0 0.1 0.1
+  children [
+    Shape {
+      appearance PBRAppearance {
+      }
+      geometry DEF G_BOX Box {
+        size 0.2 0.2 0.3
+      }
+    }
+  ]
+  boundingObject USE G_BOX
+  physics Physics {
+  }
+}
